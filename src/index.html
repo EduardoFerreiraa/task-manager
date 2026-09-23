@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="styles/style.css" />
+  </head>
+  <body>
+    <form id="form">
+      <div class="container">
+        <div>
+          <h1 id="title">Task Manager</h1>
+          <p id="descricao">Organize suas tarefas e seja mais produtivo!</p>
+        </div>
+        <div id="concluidas">
+          <div class="back">
+            <p>Todas</p>
+            <p id="count-todas">0</p>
+          </div>
+          <div class="back pendentes-tasks">
+            <p>Pendentes</p>
+            <p id="count-pendentes">0</p>
+          </div>
+          <div class="back concluidas-tasks">
+            <p>Concluídas</p>
+            <p id="count-concluidas">0</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="add-task">
+        <input
+          type="text"
+          name="task"
+          id="task"
+          placeholder="Digite o que você precisa fazer..."
+        />
+        <button type="submit" id="btn-adicionar">+ Adiconar</button>
+      </div>
+
+      <div class="filters">
+        <ul class="btn-status">
+          <li>Todas</li>
+          <li>Pendentes</li>
+          <li>Concluídas</li>
+        </ul>
+        <ul class="btn-status">
+          <li id="limpar-historico">Limpar histórico</li>
+        </ul>
+      </div>
+
+      <div id="resultado-task"></div>
+    </form>
+
+    <script src="scripts/main.js"></script>
+  </body>
+</html>

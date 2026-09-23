@@ -1,0 +1,216 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(250, 250, 250);
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 25px;
+}
+
+#title {
+  font-size: 2.3rem;
+  color: rgb(0, 102, 255);
+}
+
+#form {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.container,
+#concluidas,
+.add-task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#concluidas {
+  gap: 10px;
+}
+
+#descricao {
+  color: gray;
+}
+
+.add-task {
+  padding: 25px;
+  border: 1px solid rgb(202, 202, 202);
+  background-color: white;
+  border-radius: 15px;
+  margin-top: 30px;
+  justify-content: center;
+  gap: 10px;
+}
+
+#task {
+  font-size: 17px;
+  outline: none;
+  border: 1px solid rgb(202, 202, 202);
+  border-radius: 15px;
+  width: 100%;
+  padding: 12px;
+}
+
+#btn-adicionar {
+  cursor: pointer;
+  font-size: 16px;
+  border: 1px solid #0084c2;
+  border-radius: 15px;
+  background-color: #0077ff;
+  font-weight: bold;
+  color: white;
+  width: 20%;
+  padding: 12px;
+  transition: background-color 0.2s ease;
+}
+
+#btn-adicionar:hover {
+  background-color: #0056b8;
+}
+
+.back {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid rgb(214, 214, 214);
+  border-radius: 15px;
+  background-color: rgba(221, 221, 221, 0.336);
+  color: gray;
+  width: 120px;
+  height: 80px;
+  font-weight: bold;
+}
+
+.pendentes-tasks {
+  color: rgb(97, 97, 0);
+  border: 1px solid rgba(255, 255, 0, 0.61);
+  background-color: rgba(253, 246, 146, 0.39);
+}
+
+.concluidas-tasks {
+  color: green;
+  border: 1px solid rgba(0, 255, 0, 0.61);
+  background-color: rgba(1, 255, 1, 0.164);
+}
+
+.filters {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-status {
+  list-style: none;
+  display: flex;
+  gap: 5px;
+}
+
+.btn-status > li {
+  cursor: pointer;
+  font-size: 15px;
+  padding: 12px 15px;
+  margin-left: 5px;
+  border: none;
+  background-color: rgb(235, 235, 235);
+  border-radius: 20px;
+  transition: background-color 0.2s ease;
+}
+
+.btn-status > li:hover {
+  background-color: rgb(199, 199, 199);
+}
+
+#resultado-task {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 25px;
+  border-radius: 15px;
+  border: 1px solid rgb(214, 214, 214);
+  padding: 15px;
+}
+
+.mostrar-erro {
+  cursor: pointer;
+  font-size: 17px;
+  padding: 25px;
+  border: 1px solid rgb(255, 111, 111);
+  color: rgb(255, 63, 63);
+  border-radius: 15px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card-tarefa {
+  font-size: 17px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgb(0, 132, 255);
+  border-radius: 15px;
+  background-color: rgb(255, 255, 255);
+  padding: 30px;
+  transition: box-shadow 0.2s ease;
+}
+
+.card-tarefa:hover,
+.mostrar-erro:hover {
+  box-shadow: 1px 1px 15px rgba(0, 110, 255, 0.26);
+}
+
+.mostrar-erro:hover {
+  box-shadow: 1px 1px 15px rgba(255, 0, 0, 0.219);
+}
+
+.btn {
+  padding: 10px 18px;
+  margin-left: 8px;
+  border: none;
+  border-radius: 25px;
+}
+
+.excluir,
+.editar,
+.pendente,
+.concluido {
+  font-size: 15px;
+  cursor: pointer;
+  background-color: white;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.excluir {
+  border: 1px solid red;
+  color: red;
+}
+
+.excluir:hover {
+  background-color: rgb(255, 54, 54);
+  color: white;
+}
+
+.editar {
+  border: 1px solid green;
+  color: green;
+}
+
+.editar:hover {
+  background-color: green;
+  color: white;
+}
+
+.pendente {
+  border: 1px solid #999900;
+  color: #999900;
+}
