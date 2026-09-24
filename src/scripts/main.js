@@ -6,16 +6,18 @@ const limparHistorico = document.querySelector("#limpar-historico");
 const todas = document.querySelector("#count-todas");
 const pendentes = document.querySelector("#count-pendentes");
 const concluidas = document.querySelector("#count-concluidas");
+const filtros = document.querySelectorAll(".btn-status:first-child li");
 
 const tarefas = [];
 const tarefasConcluidas = [];
 
 let editandoTarefaId = null;
+let filtroAtual = "todas";
 
-function renderizarTarefas() {
+function renderizarTarefas(lista) {
   resultadoTask.innerHTML = "";
 
-  tarefas.forEach(function (tarefa) {
+  lista.forEach(function (tarefa) {
     const card = document.createElement("div");
     const cardBtn = document.createElement("div");
 
@@ -28,6 +30,7 @@ function renderizarTarefas() {
     const botaoConcluido = document.createElement("input");
 
     botaoConcluido.type = "checkbox";
+    botaoConcluido.checked = tarefa.concluida;
 
     botaoExcluir.classList.add("btn", "excluir");
     botaoEditar.classList.add("btn", "editar");
@@ -47,7 +50,18 @@ function renderizarTarefas() {
       });
 
       tarefas.splice(indice, 1);
-      renderizarTarefas();
+
+      const indiceConcluidas = tarefasConcluidas.findIndex(
+        function (tarefaConcluida) {
+          return tarefaConcluida === id;
+        },
+      );
+
+      if (indiceConcluidas !== -1) {
+        tarefasConcluidas.splice(indiceConcluidas, 1);
+      }
+
+      renderizarTarefas(obterTarefasFiltradas());
       renderizarStatus();
     });
 
@@ -63,6 +77,8 @@ function renderizarTarefas() {
       if (botaoConcluido.checked) {
         tarefasConcluidas.push(id);
         concluidas.textContent = tarefasConcluidas.length;
+
+        tarefa.concluida = true;
       } else {
         const indice = tarefasConcluidas.findIndex(function (tarefaDoArray) {
           return tarefaDoArray === id;
@@ -70,7 +86,11 @@ function renderizarTarefas() {
 
         tarefasConcluidas.splice(indice, 1);
         concluidas.textContent = tarefasConcluidas.length;
+
+        tarefa.concluida = false;
       }
+
+      renderizarTarefas(obterTarefasFiltradas());
     });
 
     card.append(nomeTarefa);
@@ -85,18 +105,55 @@ function renderizarTarefas() {
 function limpar() {
   limparHistorico.addEventListener("click", function () {
     tarefas.length = 0;
+    tarefasConcluidas.length = 0;
 
-    renderizarTarefas();
+    renderizarTarefas(obterTarefasFiltradas());
     renderizarStatus();
   });
 }
 
 // Mostra status
 function renderizarStatus() {
+  const tarefasPendentes = tarefas.filter(function (tarefa) {
+    return tarefa.concluida === false;
+  });
+
   const tarefasTotal = tarefas.length;
+
   todas.textContent = tarefasTotal;
-  pendentes.textContent = tarefasTotal;
+  pendentes.textContent = tarefasPendentes.length;
+  concluidas.textContent = tarefasConcluidas.length;
 }
+
+function obterTarefasFiltradas() {
+  if (filtroAtual === "concluidas") {
+    return tarefas.filter(function (tarefa) {
+      return tarefa.concluida === true;
+    });
+  }
+
+  if (filtroAtual === "pendentes") {
+    return tarefas.filter(function (tarefa) {
+      return tarefa.concluida === false;
+    });
+  }
+
+  return tarefas;
+}
+
+filtros.forEach(function (filtro) {
+  filtro.addEventListener("click", function () {
+    if (filtro.textContent === "Todas") {
+      filtroAtual = "todas";
+    } else if (filtro.textContent === "Pendentes") {
+      filtroAtual = "pendentes";
+    } else {
+      filtroAtual = "concluidas";
+    }
+
+    renderizarTarefas(obterTarefasFiltradas());
+  });
+});
 
 // Form
 form.addEventListener("submit", (e) => {
@@ -124,7 +181,7 @@ form.addEventListener("submit", (e) => {
     });
 
     tarefa.nome = task;
-    renderizarTarefas();
+    renderizarTarefas(obterTarefasFiltradas());
 
     editandoTarefaId = null;
     inputTask.value = "";
@@ -137,12 +194,13 @@ form.addEventListener("submit", (e) => {
   const novaTarefas = {
     id: novoId,
     nome: task,
+    concluida: false,
   };
 
   tarefas.push(novaTarefas);
   inputTask.value = "";
 
-  renderizarTarefas();
+  renderizarTarefas(obterTarefasFiltradas());
   renderizarStatus();
 });
 
